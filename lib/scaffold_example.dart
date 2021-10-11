@@ -11,28 +11,18 @@ class ScaffoldExample extends StatefulWidget {
 class _ScaffoldExampleState extends State<ScaffoldExample> {
   int tabIndex = 0;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  // PersistentBottomSheetController _controller;
 
-  void openDr() {
+  void openDrawer() {
+    scaffoldKey.currentState!.openDrawer();
+  }
+
+  void openEndDrawer() {
     scaffoldKey.currentState!.openEndDrawer();
   }
 
-  // void toggleBottomSheet() {
-  //   if (_controller == null) {
-  //     _controller = scaffoldKey.currentState.showBottomSheet(
-  //       (context) => Container(
-  //         color: Colors.deepOrange,
-  //         height: 200,
-  //         child: const Center(
-  //           child: Text('Dottom sheet'),
-  //         ),
-  //       ),
-  //     );
-  //   } else {
-  //     _controller.close();
-  //     _controller = null;
-  //   }
-  // }
+  void openBottomSheet() {
+    scaffoldKey.currentState!.showBottomSheet((context) => FirstPage());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,24 +76,43 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
           ),
         ),
         body: Center(
-          child: Builder(
-            builder: (context) => TextButton(
-              onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return Text('ssssds');
+          child: Column(
+            children: [
+              TextButton(
+                  onPressed: () {
+                    openDrawer();
                   },
-                );
-              },
-              child: const Text('Open drawer'),
-            ),
+                  child: Text('Open Drawer')),
+              TextButton(
+                  onPressed: () {
+                    openEndDrawer();
+                  },
+                  child: Text('Open EndDrawer')),
+              TextButton(
+                  onPressed: () {
+                    openBottomSheet();
+                  },
+                  child: Text('Open BottomSheet')),
+            ],
           ),
+          // child: Builder(
+          //   builder: (context) => TextButton(
+          //     onPressed: () {
+          //       showModalBottomSheet(
+          //         context: context,
+          //         builder: (context) {
+          //           return Text('ssssds');
+          //         },
+          //       );
+          //     },
+          //     child: const Text('Open drawer'),
+          //   ),
+          // ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
-          onPressed: openDr,
+          onPressed: openDrawer,
           // child: const Icon(Icons.add_chart_outlined),
         ),
         bottomNavigationBar: BottomAppBar(
@@ -144,13 +153,19 @@ class FirstPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Center(
-        child: Text(
-          'First Page',
-          style: TextStyle(color: Colors.blueAccent),
-        ),
+    return BottomSheet(
+      builder: (context) => Container(
+        height: 200,
+        color: Colors.black38,
+        child: const Center(child: Text('Container in BottomSheet')),
+        // decoration: const BoxDecoration(
+        //   borderRadius: BorderRadius.only(
+        //     topLeft: Radius.circular(20),
+        //     topRight: Radius.circular(20),
+        //   ),
+        // ),
       ),
+      onClosing: () {},
     );
   }
 }
