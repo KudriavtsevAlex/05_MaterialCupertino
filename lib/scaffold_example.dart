@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-class ScaffoldEx extends StatefulWidget {
-  const ScaffoldEx({Key? key}) : super(key: key);
+class ScaffoldExample extends StatefulWidget {
+  const ScaffoldExample({Key? key}) : super(key: key);
 
   @override
-  _ScaffoldExState createState() => _ScaffoldExState();
+  _ScaffoldExampleState createState() => _ScaffoldExampleState();
 }
 
-class _ScaffoldExState extends State<ScaffoldEx> {
-  int tabIndex = 0;
+class _ScaffoldExampleState extends State<ScaffoldExample> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   void openBottomSheet() {
@@ -77,61 +76,77 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
-            child: CircleAvatar(
-              radius: 68,
-              backgroundColor: Colors.cyan,
-              backgroundImage: NetworkImage(
-                  'https://omoro.ru/wp-content/uploads/2018/11/rozshi_parnei-21.jpg'),
-            ),
+          Container(
+            color: Colors.amberAccent,
+            height: 100,
+            width: 100,
           ),
-          ListTile(
-            leading: const Icon(Icons.account_box_rounded),
-            title: const Text('Profile'),
-            trailing: const Icon(Icons.keyboard_arrow_right),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: const Icon(Icons.image_rounded),
-            title: const Text('Images'),
-            trailing: const Icon(Icons.keyboard_arrow_right),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: const Icon(Icons.file_copy_rounded),
-            title: const Text('Files'),
-            trailing: const Icon(Icons.keyboard_arrow_right),
-            onTap: () {},
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text('Вход'),
-                    ),
-                  ),
-                  Container(
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text('Регистрация'),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+          Container(
+            color: Colors.blue,
+            height: 100,
+            width: 100,
           ),
         ],
       ),
+      //   child: ListView(
+      //     children: [
+      //       const DrawerHeader(
+      //         decoration: BoxDecoration(
+      //           color: Colors.blue,
+      //         ),
+      //         child: CircleAvatar(
+      //           radius: 68,
+      //           backgroundColor: Colors.cyan,
+      //           backgroundImage: NetworkImage(
+      //               'https://omoro.ru/wp-content/uploads/2018/11/rozshi_parnei-21.jpg'),
+      //         ),
+      //       ),
+      //       ListTile(
+      //         leading: const Icon(Icons.account_box_rounded),
+      //         title: const Text('Profile'),
+      //         trailing: const Icon(Icons.keyboard_arrow_right),
+      //         onTap: () {},
+      //       ),
+      //       ListTile(
+      //         leading: const Icon(Icons.image_rounded),
+      //         title: const Text('Images'),
+      //         trailing: const Icon(Icons.keyboard_arrow_right),
+      //         onTap: () {},
+      //       ),
+      //       ListTile(
+      //         leading: const Icon(Icons.file_copy_rounded),
+      //         title: const Text('Files'),
+      //         trailing: const Icon(Icons.keyboard_arrow_right),
+      //         onTap: () {},
+      //       ),
+      //       Column(
+      //         mainAxisAlignment: MainAxisAlignment.end,
+      //         crossAxisAlignment: CrossAxisAlignment.end,
+      //         children: [
+      //           Row(
+      //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //             children: [
+      //               Container(
+      //                 child: ElevatedButton(
+      //                   onPressed: () {},
+      //                   child: Text('Вход'),
+      //                 ),
+      //               ),
+      //               Container(
+      //                 child: ElevatedButton(
+      //                   onPressed: () {},
+      //                   child: Text('Регистрация'),
+      //                 ),
+      //               ),
+      //             ],
+      //           ),
+      //         ],
+      //       ),
+      //     ],
+      //   ),
     );
   }
 }
