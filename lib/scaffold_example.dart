@@ -18,32 +18,69 @@ class _ScaffoldExampleState extends State<ScaffoldExample> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        key: scaffoldKey,
-        body: TabBarBody(),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: openBottomSheet,
-        ),
-        bottomNavigationBar: BottomAppBar(
-          shape: CircularNotchedRectangle(),
-          elevation: 10,
-          notchMargin: 8,
-          clipBehavior: Clip.antiAlias,
-          child: Container(
-            child: BottomNavigationBar(
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'Home',
+      home: DefaultTabController(
+        initialIndex: 1,
+        length: 3,
+        child: Scaffold(
+          key: scaffoldKey,
+          appBar: AppBar(
+            title: const Text('App bar title!'),
+            bottom: const TabBar(
+              tabs: <Widget>[
+                Tab(
+                  icon: Icon(Icons.cloud_outlined),
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.business),
-                  label: 'Business',
+                Tab(
+                  icon: Icon(Icons.beach_access_sharp),
+                ),
+                Tab(
+                  icon: Icon(Icons.brightness_5_sharp),
                 ),
               ],
             ),
+            actions: [
+              Builder(
+                builder: (context) => IconButton(
+                  icon: Icon(Icons.person_outline_rounded),
+                  onPressed: () {
+                    Scaffold.of(context).openEndDrawer();
+                  },
+                ),
+              ),
+            ],
+          ),
+          body: const TabBarView(
+            children: <Widget>[
+              Center(
+                child: Text("It's cloudy here"),
+              ),
+              Center(
+                child: Text("It's rainy here"),
+              ),
+              Center(
+                child: Text("It's sunny here"),
+              ),
+            ],
+          ),
+          drawer: AppDrawer(),
+          endDrawer: AppEndDrawer(),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: FloatingActionButton(
+            child: const Icon(Icons.add),
+            onPressed: openBottomSheet,
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.business),
+                label: 'Business',
+              ),
+            ],
           ),
         ),
       ),
@@ -76,77 +113,64 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            color: Colors.amberAccent,
-            height: 100,
-            width: 100,
-          ),
-          Container(
-            color: Colors.blue,
-            height: 100,
-            width: 100,
-          ),
-        ],
+      child: SafeArea(
+        child: Column(
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(),
+              child: CircleAvatar(
+                radius: 68,
+                backgroundColor: Colors.cyan,
+                backgroundImage: NetworkImage(
+                    'https://omoro.ru/wp-content/uploads/2018/11/rozshi_parnei-21.jpg'),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.account_box_rounded),
+              title: const Text('Profile'),
+              trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.image_rounded),
+              title: const Text('Images'),
+              trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.file_copy_rounded),
+              title: const Text('Files'),
+              trailing: const Icon(Icons.keyboard_arrow_right),
+              onTap: () {},
+            ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: Text('Вход'),
+                        ),
+                      ),
+                      Container(
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: Text('Регистрация'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
-      //   child: ListView(
-      //     children: [
-      //       const DrawerHeader(
-      //         decoration: BoxDecoration(
-      //           color: Colors.blue,
-      //         ),
-      //         child: CircleAvatar(
-      //           radius: 68,
-      //           backgroundColor: Colors.cyan,
-      //           backgroundImage: NetworkImage(
-      //               'https://omoro.ru/wp-content/uploads/2018/11/rozshi_parnei-21.jpg'),
-      //         ),
-      //       ),
-      //       ListTile(
-      //         leading: const Icon(Icons.account_box_rounded),
-      //         title: const Text('Profile'),
-      //         trailing: const Icon(Icons.keyboard_arrow_right),
-      //         onTap: () {},
-      //       ),
-      //       ListTile(
-      //         leading: const Icon(Icons.image_rounded),
-      //         title: const Text('Images'),
-      //         trailing: const Icon(Icons.keyboard_arrow_right),
-      //         onTap: () {},
-      //       ),
-      //       ListTile(
-      //         leading: const Icon(Icons.file_copy_rounded),
-      //         title: const Text('Files'),
-      //         trailing: const Icon(Icons.keyboard_arrow_right),
-      //         onTap: () {},
-      //       ),
-      //       Column(
-      //         mainAxisAlignment: MainAxisAlignment.end,
-      //         crossAxisAlignment: CrossAxisAlignment.end,
-      //         children: [
-      //           Row(
-      //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //             children: [
-      //               Container(
-      //                 child: ElevatedButton(
-      //                   onPressed: () {},
-      //                   child: Text('Вход'),
-      //                 ),
-      //               ),
-      //               Container(
-      //                 child: ElevatedButton(
-      //                   onPressed: () {},
-      //                   child: Text('Регистрация'),
-      //                 ),
-      //               ),
-      //             ],
-      //           ),
-      //         ],
-      //       ),
-      //     ],
-      //   ),
     );
   }
 }
@@ -165,76 +189,18 @@ class _AppEndDrawerState extends State<AppEndDrawer> {
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            CircleAvatar(
-              radius: 50,
+          children: [
+            const CircleAvatar(
+              radius: 100,
               backgroundImage: NetworkImage(
-                  'https://biser-mix.ru/wp-content/uploads/2020/12/58.jpeg'),
+                  'https://www.pressfoto.ru/mediasample/s.pfst.net/2010.11/370896342083aaf4ff84b8e49da5168156c2179576_b.jpg?PressFoto_370896.jpg'),
             ),
-            Text('hi!'),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class TabBarBody extends StatefulWidget {
-  const TabBarBody({Key? key}) : super(key: key);
-
-  @override
-  State<TabBarBody> createState() => _TabBarBodyState();
-}
-
-class _TabBarBodyState extends State<TabBarBody> {
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-      initialIndex: 1,
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('App bar title!'),
-          bottom: const TabBar(
-            tabs: <Widget>[
-              Tab(
-                icon: Icon(Icons.cloud_outlined),
-              ),
-              Tab(
-                icon: Icon(Icons.beach_access_sharp),
-              ),
-              Tab(
-                icon: Icon(Icons.brightness_5_sharp),
-              ),
-            ],
-          ),
-          actions: [
-            Builder(
-              builder: (context) => IconButton(
-                icon: Icon(Icons.person_outline_rounded),
-                onPressed: () {
-                  Scaffold.of(context).openEndDrawer();
-                },
-                // onPressed: toggleBottomSheet,
-              ),
-            )
-          ],
-        ),
-        body: const TabBarView(
-          children: <Widget>[
-            Center(
-              child: Text("It's cloudy here"),
-            ),
-            Center(
-              child: Text("It's rainy here"),
-            ),
-            Center(
-              child: Text("It's sunny here"),
+            Container(
+              child: Text('Добрый вечер!'),
+              padding: const EdgeInsets.fromLTRB(10, 50, 10, 10),
             ),
           ],
         ),
-        drawer: AppDrawer(),
-        endDrawer: AppEndDrawer(),
       ),
     );
   }
